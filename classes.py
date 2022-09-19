@@ -1,5 +1,4 @@
 # Magic the Lambda-ing!
-
 import random
 
 
@@ -23,7 +22,9 @@ class Card:
         >>> other_staff.defense
         500
         """
-        "*** YOUR CODE HERE ***"
+        self.name = name
+        self.attack = attack
+        self.defense = defense
 
     def power(self, opponent_card):
         """
@@ -42,6 +43,7 @@ class Card:
         50.0
         """
         "*** YOUR CODE HERE ***"
+        return self.attack - (opponent_card.defense/2)
 
     def effect(self, opponent_card, player, opponent):
         """
@@ -79,7 +81,7 @@ class Player:
         """
         self.deck = deck
         self.name = name
-        "*** YOUR CODE HERE ***"
+        self.hand = [deck.draw() for i in range(5)]
 
     def draw(self):
         """Draw a card from the player's deck and add it to their hand.
@@ -93,7 +95,8 @@ class Player:
         6
         """
         assert not self.deck.is_empty(), 'Deck is empty!'
-        "*** YOUR CODE HERE ***"
+        
+        return self.hand.append(self.deck.draw())
 
     def play(self, card_index):
         """Remove and return a card from the player's hand at the given index.
@@ -109,7 +112,7 @@ class Player:
         >>> len(test_player.hand)
         2
         """
-        "*** YOUR CODE HERE ***"
+        return self.hand.pop(card_index)
 
     def display_hand(self):
         """
@@ -125,6 +128,7 @@ class Player:
         Play a random card from hand.
         """
         return self.play(random.randrange(len(self.hand)))
+
 
 ######################
 # Optional Questions #
@@ -335,3 +339,4 @@ class Game:
         """
         print('{}\'s score: {}'.format(self.player1.name, self.p1_score))
         print('Opponent\'s score: {}'.format(self.p2_score))
+
